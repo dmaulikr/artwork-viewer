@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import APIKit
+//import APIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,19 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let request = GetArtworkRequest()
-        
-        Session.send(request) { result in
-            switch result {
-            case .success(let artworkData):
-                for item in artworkData {
-                    print("title: \(item["title"])")
-                    print("image: \(item["image"])")
-                }
-            case .failure(let err):
-                print("error")
-            }
-        }
+//        let request = GetArtworkRequest()
+//        
+//        Session.send(request) { result in
+//            switch result {
+//            case .success(let data):
+//                print(data)
+//            case .failure(let _):
+//                print("error")
+//            }
+//        }
         
         return true
     }

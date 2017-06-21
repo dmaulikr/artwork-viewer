@@ -21,15 +21,17 @@ struct ArtworkData {
     
     init?(_ dic: [String: Any]) {
         
+        print(dic["results"]! as! [[String:String]])
+        
         guard let array = dic["results"] as? [[String:String]] else {
             return nil
         }
         
         for item in array {
-            guard let title = item["collectionName"] as? String else {
+            guard let title = item["collectionName"] else {
                 return nil
             }
-            guard let image = item["artworkUrl100"] as? String else {
+            guard let image = item["artworkUrl100"] else {
                 return nil
             }
             let data = [
@@ -72,6 +74,8 @@ struct GetArtworkRequest: ArtworkRequestType {
     
     // 受信完了後のデコード処理
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        
+        print(object)
         
         let dic = object as? [String:Any]
         let artworkData = ArtworkData(dic!)
