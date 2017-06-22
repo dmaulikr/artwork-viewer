@@ -50,10 +50,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         ])
                 }
                 self.tableView.reloadData()
-        },
+            },
             fail: { error in
                 print(error)
-        }
+            }
         )
     }
     
@@ -68,6 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        
         cell.setCell(self.artistData[indexPath.row])
         
         return cell
@@ -96,9 +97,11 @@ class CustomTableViewCell: UITableViewCell {
         self.artistName.text = data["artistName"]
         self.musicName.text = data["trackName"]
         let url = URL(string: data["artworkUrl"]!)
-        guard let imageData = try? Data(contentsOf: url!) else { return }
+        let data = try? Data(contentsOf: url!)
         
-        self.artworkImage.image = UIImage(data: imageData)
+        if let imageData = data {
+            self.artworkImage.image = UIImage(data: imageData)
+        }
     }
     
 }
