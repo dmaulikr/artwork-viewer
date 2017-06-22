@@ -14,7 +14,7 @@
 		9ABC32151EF9860F0042E42B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ABC32131EF9860F0042E42B /* LaunchScreen.storyboard */; };
 		9ABC321F1EF9872B0042E42B /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABC321D1EF9872B0042E42B /* APIKit.framework */; };
 		9ABC32201EF9872B0042E42B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABC321E1EF9872B0042E42B /* Result.framework */; };
-		9ABC32231EF988490042E42B /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABC32221EF988490042E42B /* Artwork.swift */; };
+		9ABC32271EFA5F950042E42B /* RequestAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABC32261EFA5F940042E42B /* RequestAgent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		9ABC32161EF9860F0042E42B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9ABC321D1EF9872B0042E42B /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = Carthage/Build/iOS/APIKit.framework; sourceTree = "<group>"; };
 		9ABC321E1EF9872B0042E42B /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		9ABC32221EF988490042E42B /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
+		9ABC32261EFA5F940042E42B /* RequestAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestAgent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 				9ABC32111EF9860F0042E42B /* Assets.xcassets */,
 				9ABC32131EF9860F0042E42B /* LaunchScreen.storyboard */,
 				9ABC32161EF9860F0042E42B /* Info.plist */,
-				9ABC32221EF988490042E42B /* Artwork.swift */,
+				9ABC32261EFA5F940042E42B /* RequestAgent.swift */,
 			);
 			path = "artwork-viewer";
 			sourceTree = "<group>";
@@ -176,7 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ABC320D1EF9860E0042E42B /* ViewController.swift in Sources */,
-				9ABC32231EF988490042E42B /* Artwork.swift in Sources */,
+				9ABC32271EFA5F950042E42B /* RequestAgent.swift in Sources */,
 				9ABC320B1EF9860E0042E42B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
