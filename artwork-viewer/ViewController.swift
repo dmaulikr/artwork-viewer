@@ -13,13 +13,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     
-    var artistData:[[String:String]] = []
+    var ActivityIndicator:UIActivityIndicatorView? = nil
     
+    var artistData:[[String:String]] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.ActivityIndicator = {
+            let ActivityIndicator = UIActivityIndicatorView()
+            ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            ActivityIndicator.center = self.view.center
+            ActivityIndicator.hidesWhenStopped = true
+            ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            self.view.addSubview(ActivityIndicator)
+            
+            return ActivityIndicator
+        }()
         
         self.fetchArtistData()
     }
@@ -29,7 +42,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
+    /// アーティストデータを取得する
     func fetchArtistData(){
+        
+        self.ActivityIndicator?.startAnimating()
+        
         let params = [
             "term": "AAA",
             "media": "music",
@@ -50,6 +67,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         ])
                 }
                 self.tableView.reloadData()
+                self.ActivityIndicator?.stopAnimating()
             },
             fail: { error in
                 print(error)
@@ -57,14 +75,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         )
     }
     
+    //MARK: - tableView delegate method
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.artistData.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
@@ -74,7 +91,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
         
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("hoge")
     }
@@ -96,7 +112,8 @@ class CustomTableViewCell: UITableViewCell {
         
         self.artistName.text = data["artistName"]
         self.musicName.text = data["trackName"]
-        let url = URL(string: data["artworkUrl"]!)
+        
+        let url = URL(string: "http://i.imgur.com/w5rkSIj.jpg")
         let data = try? Data(contentsOf: url!)
         
         if let imageData = data {
