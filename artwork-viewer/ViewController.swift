@@ -111,7 +111,10 @@ class CustomTableViewCell: UITableViewCell {
         self.artistName.text = data["artistName"]
         self.musicName.text = data["trackName"]
         
-        let url = URL(string: "http://i.imgur.com/w5rkSIj.jpg")
+        
+        let aaaUrl = "http://is3.mzstatic.com/image/thumb/Music20/v4/d4/6c/af/d46caf98-ff6c-1707-135d-58d6ed9ea6a2/source/500x500bb.jpg"
+        
+        let url = URL(string: aaaUrl)
         let data = try? Data(contentsOf: url!)
         
         if let imageData = data {
