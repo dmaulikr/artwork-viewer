@@ -122,7 +122,7 @@ class CustomTableViewCell: UITableViewCell {
         
         let url = URL(string: model.artworkImage)
         
-        self.artworkImage.image = UIImage(named: "hasikan")
+        self.artworkImage.image = UIImage(named: "placeholder")
         
         DispatchQueue.global(qos: .background).async {
             let data = try? Data(contentsOf: url!)
