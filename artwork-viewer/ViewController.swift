@@ -85,7 +85,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        cell.setCell(self.artistData[indexPath.row])
+        let model = ArtworkModel(
+            artwork: self.artistData[indexPath.row]["artworkUrl"]!,
+            track: self.artistData[indexPath.row]["trackName"]!,
+            artist: self.artistData[indexPath.row]["artistName"]!
+        )
+        cell.setCell(model)
         
         return cell
         
@@ -106,19 +111,26 @@ class CustomTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setCell(_ data: [String:String]){
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+    func setCell(_ model: ArtworkModel){
         
-        self.artistName.text = data["artistName"]
-        self.musicName.text = data["trackName"]
+        self.artistName.text = model.artistName
+        self.musicName.text = model.musicName
         
+        let url = URL(string: model.artworkImage)
         
-        let aaaUrl = "http://is3.mzstatic.com/image/thumb/Music20/v4/d4/6c/af/d46caf98-ff6c-1707-135d-58d6ed9ea6a2/source/500x500bb.jpg"
+        self.artworkImage.image = UIImage(named: "hasikan")
         
-        let url = URL(string: aaaUrl)
-        let data = try? Data(contentsOf: url!)
-        
-        if let imageData = data {
-            self.artworkImage.image = UIImage(data: imageData)
+        DispatchQueue.global(qos: .background).async {
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                if let imageData = data {
+                    self.artworkImage.image = UIImage(data: imageData)
+                }
+            }
         }
     }
     
