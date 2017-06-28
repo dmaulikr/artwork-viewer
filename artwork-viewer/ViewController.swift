@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var ActivityIndicator:UIActivityIndicatorView? = nil
     
-    var artistData:[[String:String]] = []
+    let artworkModelStore:ArtworkModelStore = ArtworkModelStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +59,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             success: { json in
                 let results = json["results"] as! [[String : AnyObject]]
                 for result in results.enumerated() {
-                    self.artistData.append([
-                        "trackName": result.element["trackName"]! as! String,
-                        "artistName": result.element["artistName"]! as! String,
-                        "artworkUrl": result.element["artworkUrl100"]! as! String
-                        ])
+                    let model = ArtworkModel(
+                        id: result.element["trackId"]! as! Int,
+                        artwork: result.element["artworkUrl100"]! as! String,
+                        track: result.element["trackName"]! as! String,
+                        artist: result.element["artistName"]! as! String
+                    )
+                    self.artworkModelStore.setModel(model)
                 }
                 self.tableView.reloadData()
                 self.ActivityIndicator?.stopAnimating()
@@ -79,18 +81,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.artistData.count
+        return self.artworkModelStore.getModelCount()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        let model = ArtworkModel(
-            artwork: self.artistData[indexPath.row]["artworkUrl"]!,
-            track: self.artistData[indexPath.row]["trackName"]!,
-            artist: self.artistData[indexPath.row]["artistName"]!
-        )
-        cell.setCell(model)
+        cell.setCell(self.artworkModelStore.getModel(indexPath.row))
         
         return cell
         
