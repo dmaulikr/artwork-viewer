@@ -8,12 +8,14 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class ListViewCell: UITableViewCell {
     
+    //MARK: - outlet
     @IBOutlet weak var artworkImage: UIImageView!
     @IBOutlet weak var musicName: UILabel!
     @IBOutlet weak var artistName: UILabel!
     
+    //MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -22,6 +24,9 @@ class CustomTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    /// cellにmodelをセットする
+    ///
+    /// - Parameter model: cellに表示させるmodel
     func setCell(_ model: ArtworkModel){
         
         self.artistName.text = model.artistName

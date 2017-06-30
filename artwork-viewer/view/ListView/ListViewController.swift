@@ -9,14 +9,16 @@
 import UIKit
 import Foundation
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    //MARK: - outlet
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK: - variable
     var ActivityIndicator:UIActivityIndicatorView? = nil
-    
     let artworkModelStore:ArtworkModelStore = ArtworkModelStore()
-
+    
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,10 +71,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
                 self.tableView.reloadData()
                 self.ActivityIndicator?.stopAnimating()
-            },
+        },
             fail: { error in
                 print(error)
-            }
+        }
         )
     }
     
@@ -85,7 +87,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListViewCell
         
         cell.setCell(self.artworkModelStore.getModel(indexPath.row))
         
