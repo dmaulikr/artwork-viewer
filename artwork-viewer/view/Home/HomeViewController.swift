@@ -23,6 +23,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         "yonezu-bremen","yonezu-flowerWall","yonezu-loser","yonezu-madHeadLove","yonezu-orion","yonezu-unbrlievers","yonezu-yankee",
         "yourname"
     ]
+    private var aCollectionCellWidth:CGFloat{
+        get { return CGFloat(self.artworks.count)*150 }
+    }
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -30,6 +33,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        
+        self.collectionView.contentOffset.x = aCollectionCellWidth
         
     }
     
@@ -42,16 +47,23 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.artworks.count
+        return self.artworks.count * 3
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! HomeCollectionViewCell
         
-        cell.setCell(self.artworks[indexPath.row])
+        let fixedIndex = NSIndexPath(row: indexPath.row%self.artworks.count, section: 0)
+        
+        cell.setCell(self.artworks[fixedIndex.row])
         
         return cell
         
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x <= 0 || (scrollView.contentOffset.x >= aCollectionCellWidth * 2.0) {
+            scrollView.contentOffset.x  = aCollectionCellWidth
+        }
+    }
 }
