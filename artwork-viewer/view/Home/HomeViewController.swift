@@ -35,11 +35,24 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.collectionView.dataSource = self
         
         self.collectionView.contentOffset.x = aCollectionCellWidth
+        self.scrollAnimation()
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func scrollAnimation(){
+        
+        UIView.animate(withDuration: 0.05, animations: {
+            
+            self.collectionView.contentOffset.x = self.collectionView.contentOffset.x + 1
+            
+        }, completion: { finished in
+            self.scrollAnimation()
+        })
+        
     }
     
     //MARK: - collection delegate method
