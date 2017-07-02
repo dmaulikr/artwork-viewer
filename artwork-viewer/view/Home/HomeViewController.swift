@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
 
     //MARK: - outlet
     @IBOutlet weak var collectionView: UICollectionView!
@@ -27,7 +27,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         "yonezu-bremen","yonezu-flowerWall","yonezu-loser","yonezu-madHeadLove","yonezu-orion","yonezu-unbrlievers","yonezu-yankee",
         "yourname"
     ]
-    private var aCollectionCellWidth:CGFloat{
+    var aCollectionCellWidth:CGFloat{
         get { return CGFloat(self.artworks.count)*150 }
     }
     
@@ -37,6 +37,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.textField.delegate = self
         
         self.collectionView.contentOffset.x = aCollectionCellWidth
         self.scrollAnimation()
@@ -51,18 +52,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    func scrollAnimation(){
-        
-        UIView.animate(withDuration: 0.05, animations: {
-            
-            self.collectionView.contentOffset.x = self.collectionView.contentOffset.x + 1
-            
-        }, completion: { finished in
-            self.scrollAnimation()
-        })
-        
     }
     
     //MARK: - collection delegate method
@@ -84,12 +73,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x <= 0 || (scrollView.contentOffset.x >= aCollectionCellWidth * 2.0) {
-            scrollView.contentOffset.x  = aCollectionCellWidth
-        }
-    }
-    
     //MARK: - perform segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "listView" {
@@ -101,6 +84,23 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 listViewController.searchArtistName = "AAA"
             }
 
+        }
+    }
+    
+    // keyboard close
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        self.textField.resignFirstResponder()
+        
+        performSegue(withIdentifier: "listView", sender: self)
+        
+        return true
+    }
+    
+    // 範囲外をタップしたらキーボード下ろす
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if self.textField.isFirstResponder {
+            self.textField.resignFirstResponder()
         }
     }
 }
