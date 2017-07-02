@@ -80,8 +80,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             if let text = self.textField.text {
                 listViewController.searchArtistName = text
-            }else{
-                listViewController.searchArtistName = "AAA"
             }
 
         }

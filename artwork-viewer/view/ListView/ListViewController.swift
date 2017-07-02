@@ -68,13 +68,29 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         Session.send(request) { result in
             switch result {
             case .success(let musicModels):
-                self.musicModels = musicModels
-                self.tableView.reloadData()
+                if musicModels.getCount() == 0 {
+                    self.buildNoResultView()
+                }else{
+                    self.musicModels = musicModels
+                    self.tableView.reloadData()
+                }
                 self.ActivityIndicator?.stopAnimating()
             case .failure(let error):
                 print("error: \(error)")
             }
         }
+        
+    }
+    
+    func buildNoResultView(){
+        
+        let view  = Bundle.main.loadNibNamed("NoResultView", owner: self, options: nil)?.first as! UIView
+        view.frame = self.view.bounds
+        view.autoresizingMask = [
+            .flexibleWidth,
+            .flexibleHeight
+        ]
+        self.view.addSubview(view)
         
     }
     
