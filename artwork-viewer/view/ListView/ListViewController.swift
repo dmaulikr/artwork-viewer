@@ -69,8 +69,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     )
                     self.artworkModelStore.setModel(model)
                 }
-                self.tableView.reloadData()
-                self.ActivityIndicator?.stopAnimating()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.ActivityIndicator?.stopAnimating()
+                }
         },
             fail: { error in
                 print(error)
