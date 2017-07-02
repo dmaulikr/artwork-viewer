@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import APIKit
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,7 +17,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - variable
     var ActivityIndicator:UIActivityIndicatorView? = nil
-    let artworkModelStore:ArtworkModelStore = ArtworkModelStore()
+    let musicModels:MusicModels = MusicModels()
     
     var searchArtistName:String? = nil
     
@@ -57,36 +58,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.ActivityIndicator?.startAnimating()
         
-        let params = [
-            "term": self.searchArtistName!,
-            "media": "music",
-            "entity": "musicTrack",
-            "country": "jp",
-            "lang": "ja_JP"
-        ]
-        
-        let ra = RequestAgent(url: "https://itunes.apple.com", method: "get", path: "/search", data: params)
-        ra.run(
-            success: { json in
-                let results = json["results"] as! [[String : AnyObject]]
-                for result in results.enumerated() {
-                    let model = ArtworkModel(
-                        id: result.element["trackId"]! as! Int,
-                        artwork: result.element["artworkUrl100"]! as! String,
-                        track: result.element["trackName"]! as! String,
-                        artist: result.element["artistName"]! as! String
-                    )
-                    self.artworkModelStore.setModel(model)
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.ActivityIndicator?.stopAnimating()
-                }
-        },
-            fail: { error in
-                print(error)
-        }
+        let request = FetchArtworkRequest(
+            term: self.searchArtistName!,
+            media: "music",
+            entity: "musicTrack",
+            country: "jp",
+            lang: "ja_JP"
         )
+        Session.send(request) { result in
+            switch result {
+            case .success(let musicModels):
+                self.musicModels = musicModels
+                self.tableView.reloadData()
+                self.ActivityIndicator?.stopAnimating()
+            case .failure(let error):
+                print("error: \(error)")
+            }
+        }
+        
     }
     
     //MARK: - tableView delegate method
@@ -100,7 +89,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListViewCell
         
-        cell.setCell(self.artworkModelStore.getModel(indexPath.row))
+        cell.setCell(self.musicModels[indexPath.row])
         
         return cell
         

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class ListViewCell: UITableViewCell {
     
@@ -27,7 +28,7 @@ class ListViewCell: UITableViewCell {
     /// cellにmodelをセットする
     ///
     /// - Parameter model: cellに表示させるmodel
-    func setCell(_ model: ArtworkModel){
+    func setCell(_ model: MusicModel){
         
         self.artistName.text = model.artistName
         self.musicName.text = model.musicName
