@@ -36,15 +36,7 @@ class ListViewCell: UITableViewCell {
         let url = URL(string: model.artworkImage!)
         
         self.artworkImage.image = UIImage(named: "placeholder")
-        
-        DispatchQueue.global(qos: .background).async {
-            let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
-                if let imageData = data {
-                    self.artworkImage.image = UIImage(data: imageData)
-                }
-            }
-        }
+        self.artworkImage.af_setImage(withURL: url!)
     }
     
 }
