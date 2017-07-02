@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var textField: UITextField!
     @IBAction func searchButton(_ sender: UIButton) {
-        performSegue(withIdentifier: "listView", sender: self)
+        self.moveView()
     }
     
     //MARK: - variable
@@ -92,7 +92,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         self.textField.resignFirstResponder()
         
-        performSegue(withIdentifier: "listView", sender: self)
+        self.moveView()
         
         return true
     }
@@ -102,5 +102,22 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if self.textField.isFirstResponder {
             self.textField.resignFirstResponder()
         }
+    }
+    
+    func moveView(){
+        
+        if self.textField.text == "" {
+            
+            let alert = UIAlertController(title: "アーティスト名を\n入力してください。", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            
+            present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        performSegue(withIdentifier: "listView", sender: self)
     }
 }
