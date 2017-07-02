@@ -13,11 +13,19 @@ class MusicModels: Mappable {
     var musics = [MusicModel]()
     
     required convenience init?(map: Map) {
-        self.init
+        self.init()
     }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         self.musics <- map["results"]
+    }
+    
+    func getCount() -> Int {
+        return self.musics.count
+    }
+    
+    func getMusic(_ row: Int) -> MusicModel {
+        return self.musics[row]
     }
     
 }

@@ -18,7 +18,7 @@ class MusicModel: Mappable {
         self.init()
     }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         self.artworkImage <- map["artworkUrl100"]
         self.trackName <- map["trackName"]
         self.artistName <- map["artistName"]

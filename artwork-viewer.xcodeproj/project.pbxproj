@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9A3C1D971F0605C600D0B412 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3C1D961F0605C600D0B412 /* ListViewController.swift */; };
 		9A3C1D991F0605F000D0B412 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3C1D981F0605F000D0B412 /* ListViewCell.swift */; };
-		9A3C1D9C1F06061500D0B412 /* RequestAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3C1D9B1F06061500D0B412 /* RequestAgent.swift */; };
 		9A3C1D9F1F060AA600D0B412 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3C1D9E1F060AA600D0B412 /* HomeViewController.swift */; };
 		9A3C1DA11F060B2D00D0B412 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3C1DA01F060B2D00D0B412 /* HomeCollectionViewCell.swift */; };
 		9A907D1D1F08E12E00C1A103 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABC321D1EF9872B0042E42B /* APIKit.framework */; };
@@ -29,7 +28,6 @@
 /* Begin PBXFileReference section */
 		9A3C1D961F0605C600D0B412 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListViewController.swift; path = view/ListView/ListViewController.swift; sourceTree = "<group>"; };
 		9A3C1D981F0605F000D0B412 /* ListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListViewCell.swift; path = view/ListView/ListViewCell.swift; sourceTree = "<group>"; };
-		9A3C1D9B1F06061500D0B412 /* RequestAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestAgent.swift; path = utils/RequestAgent.swift; sourceTree = "<group>"; };
 		9A3C1D9E1F060AA600D0B412 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = view/Home/HomeViewController.swift; sourceTree = "<group>"; };
 		9A3C1DA01F060B2D00D0B412 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeCollectionViewCell.swift; path = view/Home/HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		9A907D201F08E4A800C1A103 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 		9A3C1D9A1F06060200D0B412 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				9A3C1D9B1F06061500D0B412 /* RequestAgent.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -260,7 +257,6 @@
 				9ABC320B1EF9860E0042E42B /* AppDelegate.swift in Sources */,
 				9A907D2C1F08E87C00C1A103 /* MusicModel.swift in Sources */,
 				9A907D2A1F08E87000C1A103 /* MusicModels.swift in Sources */,
-				9A3C1D9C1F06061500D0B412 /* RequestAgent.swift in Sources */,
 				9A3C1D971F0605C600D0B412 /* ListViewController.swift in Sources */,
 				9A3C1D9F1F060AA600D0B412 /* HomeViewController.swift in Sources */,
 				9A3C1D991F0605F000D0B412 /* ListViewCell.swift in Sources */,

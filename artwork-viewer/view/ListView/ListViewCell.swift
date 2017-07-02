@@ -31,9 +31,9 @@ class ListViewCell: UITableViewCell {
     func setCell(_ model: MusicModel){
         
         self.artistName.text = model.artistName
-        self.musicName.text = model.musicName
+        self.musicName.text = model.trackName
         
-        let url = URL(string: model.artworkImage)
+        let url = URL(string: model.artworkImage!)
         
         self.artworkImage.image = UIImage(named: "placeholder")
         

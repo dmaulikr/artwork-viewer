@@ -17,7 +17,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - variable
     var ActivityIndicator:UIActivityIndicatorView? = nil
-    let musicModels:MusicModels = MusicModels()
+    var musicModels:MusicModels = MusicModels()
     
     var searchArtistName:String? = nil
     
@@ -83,13 +83,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.artworkModelStore.getModelCount()
+        return self.musicModels.getCount()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListViewCell
         
-        cell.setCell(self.musicModels[indexPath.row])
+        cell.setCell(self.musicModels.getMusic(indexPath.row))
         
         return cell
         
