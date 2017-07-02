@@ -12,6 +12,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     //MARK: - outlet
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var textField: UITextField!
+    @IBAction func searchButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "listView", sender: self)
+    }
     
     //MARK: - variable
     let artworks:[String] = [
@@ -77,6 +81,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x <= 0 || (scrollView.contentOffset.x >= aCollectionCellWidth * 2.0) {
             scrollView.contentOffset.x  = aCollectionCellWidth
+        }
+    }
+    
+    //MARK: - perform segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "listView" {
+            guard let listViewController = segue.destination as? ListViewController else { return }
+            
+            if let text = self.textField.text {
+                listViewController.searchArtistName = text
+            }else{
+                listViewController.searchArtistName = "AAA"
+            }
+
         }
     }
 }

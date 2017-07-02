@@ -18,12 +18,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var ActivityIndicator:UIActivityIndicatorView? = nil
     let artworkModelStore:ArtworkModelStore = ArtworkModelStore()
     
+    var searchArtistName:String? = nil
+    
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.navigationItem.title = self.searchArtistName
         
         self.ActivityIndicator = {
             let ActivityIndicator = UIActivityIndicatorView()
@@ -49,7 +53,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.ActivityIndicator?.startAnimating()
         
         let params = [
-            "term": "AAA",
+            "term": self.searchArtistName!,
             "media": "music",
             "entity": "musicTrack",
             "country": "jp",
